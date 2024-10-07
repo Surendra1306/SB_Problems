@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+ 
+  <a class="navbar-brand" href="#">Employee Management System</a>
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/employees}">Employee Management</a>
+      </li>
+    </ul>
+  </div>
+  
+</nav>
+
+	<div class ="container">
+		<div class = "row">
+			<h1> List of Employees </h1>
+		</div>
+		
+		
+		<table class = "table table-striped table-bordered">
+			<thead class = "table-info">
+				<tr>
+					<th> Id </th>
+					<th> Name </th>
+					<th> Email </th>
+					<th> Password </th>
+					<th> DOB </th>
+					<th> Age </th>
+					<th> Salary </th>
+					<th> Status </th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each = "emp, stat: ${employees}">
+					<td th:text="${stat.index + 1}"></td>
+					<td th:text = "${emp.name}"></td>
+					<td th:text = "${emp.email}"></td>
+					<td th:text = "${emp.pwd}"></td>
+					<td th:text = "${emp.dob}"></td>
+					<td th:text = "${emp.age}"></td>
+					<td th:text = "${emp.salary}"></td>
+					<td th:text = "${emp.status ? 'Active' : 'Inactive'}"></td>
+					<td>
+						<a th:href = "@{/employees/update/{empId}(empId=${emp.id})}"
+						 class = "btn btn-primary">Update</a>
+						
+						<a th:href = "@{/employees/delete/{eid}(eid=${emp.id})}"
+						 class = "btn btn-danger">Delete</a>
+						 
+					</td>
+				</tr>
+			</tbody>
+		
+		</table>
+		
+				<div class = "row">
+			<div class = "col-lg-3">
+				<a th:href = "@{/employees/newEmp}" class = "btn btn-primary btn-sm mb-3"> Add Employee</a>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
